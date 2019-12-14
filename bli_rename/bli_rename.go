@@ -74,6 +74,8 @@ func main() {
 	var Finfo os.FileInfo
 	var Mp4 mp4
 	var Info info
+	fmt.Println("在哔哩哔哩的视频下载目录中运行，将根据info文件中的信息获取视频名称，对文件名修改名称，并移动到当前目录下；")
+	fmt.Println("开始扫描当前目录 ......\n====================================")
 	files := Scandir(".")
 
 	for _, file := range files {
@@ -90,7 +92,7 @@ func main() {
 				}
 			}
 			Nfname := OpenJson(Info.Path + Info.Basename)
-			fmt.Println(Mp4.Path+Mp4.Basename, " ==> ", filepath.Base(file)+`-`+Nfname+Mp4.Ext)
+			fmt.Println("处理视屏文件：", Mp4.Path+Mp4.Basename, " ==> ", filepath.Base(file)+`-`+Nfname+Mp4.Ext)
 			err := os.Rename(Mp4.Path+Mp4.Basename, filepath.Base(file)+`-`+Nfname+Mp4.Ext)
 			if err != nil {
 				panic(err)
