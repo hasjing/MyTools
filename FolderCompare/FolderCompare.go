@@ -7,7 +7,9 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io/ioutil"
 	"os"
+	"strings"
 )
 
 var Fctype string       //设置比较算法  MD5 或 SHA
@@ -60,4 +62,13 @@ func main() {
 	fmt.Println("Fsource==", Fsource)
 	fmt.Println("Fdestination==", Fdestination)
 	fmt.Println("Foutput==", Foutput)
+	Fdestination = strings.ReplaceAll(Fdestination, "\\", "/")
+	Fsource = strings.ReplaceAll(Fsource, "\\", "/")
+	//	name := "GenRsaKey/rsa_private_key.pem"
+	fmt.Println("Openfile=", Fdestination)
+	if contents, err := ioutil.ReadFile(Fdestination); err == nil {
+		//因为contents是[]byte类型，直接转换成string类型后会多一行空格,需要使用strings.Replace替换换行符
+		//   result := strings.Replace(string(contents),"\n","",1)
+		fmt.Println(string(contents))
+	}
 }
